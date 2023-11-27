@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='funny-icon.png') }}" type="image/x-icon">
+    <title>Lexicographic Analyzer</title>
+</head>
+
+<body>
+    <nav>
+        <img src="{{ url_for('static', filename='logoeafit.png') }}" alt="Logo Universidad EAFIT">
+        <h1>Lexicographic Analyzer</h1>
+    </nav>
+    <main>
+        <div class="main-container">
+            {% if result_string %}
+                <form class="animation-for-lower" action="{{ url_for('index') }}" method="POST">
+                    <textarea name="text" id="text" rows="1" placeholder="Write your phrase here..."></textarea>
+                    <button type="submit" value="Analyze">Analyze<img src="{{ url_for('static', filename='magnifying-glass-solid.svg') }}" alt="Search icon"></button>
+                </form>
+            {% else %}
+                <form action="{{ url_for('index') }}" method="POST">
+                    <textarea name="text" id="text" rows="1" placeholder="Write your phrase here..."></textarea>
+                    <button type="submit" value="Analyze">Analyze<img src="{{ url_for('static', filename='magnifying-glass-solid.svg') }}" alt="Search icon"></button>
+                </form>
+            {% endif %}
+
+            {% if result_string %}
+                <div class="result">
+                    <h2>Analysis results</h2>
+                    <p>Number of words: {{ tokens[1][1] }}</p>
+                    <p>Number of emojis: {{ tokens[0][1] }}</p>
+                    <h2>New phrase with emojis</h2>
+                    <p>{{ result_string }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </main>
+</body>
+
+</html>
